@@ -1,0 +1,26 @@
+<%-- Tarjeta de producto reutilizable. Requiere la variable "p" (Producto). --%>
+<div class="card h-100 tarjeta-producto border-0 shadow-sm">
+    <a href="${ctx}/producto?id=${p.idProducto}" class="text-decoration-none">
+        <div class="img-producto icono-cat-${p.idCategoria}">${p.icono}</div>
+    </a>
+    <div class="card-body d-flex flex-column">
+        <a href="${ctx}/producto?id=${p.idProducto}" class="text-dark text-decoration-none fw-semibold"><c:out value="${p.nombre}"/></a>
+        <small class="text-muted mb-2"><c:out value="${p.categoriaNombre}"/></small>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="precio">Q <fmt:formatNumber value="${p.precio}" pattern="#,##0.00"/></span>
+            <c:choose>
+                <c:when test="${p.agotado}"><span class="badge text-bg-secondary">Agotado</span></c:when>
+                <c:otherwise>
+                    <form action="${ctx}/carrito" method="post">
+                        <input type="hidden" name="csrf" value="${sessionScope.csrf}">
+                        <input type="hidden" name="accion" value="agregar">
+                        <input type="hidden" name="idProducto" value="${p.idProducto}">
+                        <input type="hidden" name="cantidad" value="1">
+                        <input type="hidden" name="volver" value="<c:out value='${volverA}'/>">
+                        <button class="btn btn-verde btn-sm"><i class="bi bi-cart-plus"></i><span class="d-none d-sm-inline"> Agregar</span></button>
+                    </form>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </div>
+</div>

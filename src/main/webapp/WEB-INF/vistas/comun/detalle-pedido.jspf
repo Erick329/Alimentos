@@ -1,0 +1,27 @@
+<%-- Detalle de un pedido (cliente y administración). Requiere la variable "pedido". --%>
+<div class="row g-3 mb-3 small">
+    <div class="col-md-4"><div class="text-muted">Fecha</div><strong><fmt:formatDate value="${pedido.fechaPedido}" pattern="dd/MM/yyyy HH:mm"/></strong></div>
+    <div class="col-md-4"><div class="text-muted">Estado</div><span class="badge text-bg-${pedido.colorEstado} fs-6">${pedido.estadoTexto}</span></div>
+    <div class="col-md-4"><div class="text-muted">Pago</div><strong>${fn:replace(pedido.metodoPago, '_', ' ')}</strong> (${pedido.estadoPago})
+        <br><span class="text-muted">Ref: <c:out value="${pedido.referenciaPago}"/></span></div>
+    <div class="col-md-8"><div class="text-muted">Dirección de envío</div><c:out value="${pedido.direccionEnvio}"/></div>
+    <div class="col-md-4"><div class="text-muted">Cliente</div><c:out value="${pedido.clienteNombre}"/><br><c:out value="${pedido.clienteEmail}"/><br><span class="text-muted">NIT:</span> <c:out value="${pedido.clienteNit}"/></div>
+</div>
+<div class="table-responsive">
+<table class="table table-sm align-middle">
+    <thead class="table-light"><tr><th>Código</th><th>Producto</th><th class="text-center">Cantidad</th><th class="text-end">Precio</th><th class="text-end">Subtotal</th></tr></thead>
+    <tbody>
+    <c:forEach var="d" items="${pedido.detalles}">
+        <tr><td><c:out value="${d.productoCodigo}"/></td><td><c:out value="${d.productoNombre}"/></td><td class="text-center">${d.cantidad}</td>
+            <td class="text-end">Q <fmt:formatNumber value="${d.precioUnitario}" pattern="#,##0.00"/></td>
+            <td class="text-end">Q <fmt:formatNumber value="${d.subtotal}" pattern="#,##0.00"/></td></tr>
+    </c:forEach>
+    </tbody>
+    <tfoot>
+        <tr><td colspan="4" class="text-end">Subtotal (IVA incluido)</td><td class="text-end">Q <fmt:formatNumber value="${pedido.subtotal}" pattern="#,##0.00"/></td></tr>
+        <tr class="text-muted small"><td colspan="4" class="text-end">IVA 12 % incluido</td><td class="text-end">Q <fmt:formatNumber value="${pedido.iva}" pattern="#,##0.00"/></td></tr>
+        <tr><td colspan="4" class="text-end">Envío</td><td class="text-end">Q <fmt:formatNumber value="${pedido.costoEnvio}" pattern="#,##0.00"/></td></tr>
+        <tr class="fw-bold fs-5"><td colspan="4" class="text-end">Total</td><td class="text-end precio">Q <fmt:formatNumber value="${pedido.total}" pattern="#,##0.00"/></td></tr>
+    </tfoot>
+</table>
+</div>

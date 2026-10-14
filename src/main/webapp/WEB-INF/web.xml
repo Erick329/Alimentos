@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>AlimentosWeb - Sistema de Ventas en Línea</display-name>
+
+    <!-- Filtros de seguridad (el orden de los filter-mapping es el orden de ejecución) -->
+    <filter>
+        <filter-name>SeguridadFilter</filter-name>
+        <filter-class>com.lacosecha.filtro.SeguridadFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AutenticacionFilter</filter-name>
+        <filter-class>com.lacosecha.filtro.AutenticacionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>SeguridadFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AutenticacionFilter</filter-name>
+        <url-pattern>/cliente/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Sesión: expira tras 20 minutos de inactividad; cookie HttpOnly -->
+    <session-config>
+        <session-timeout>20</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!-- En producción con HTTPS activar: <secure>true</secure> -->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <!-- Páginas de error amigables (no muestran detalles técnicos) -->
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/vistas/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/vistas/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/vistas/error.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/vistas/error.jsp</location>
+    </error-page>
+
+    <!-- Todas las páginas JSP en UTF-8 (tildes, ñ y emojis) -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <url-pattern>*.jspf</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+    <welcome-file-list>
+        <welcome-file>inicio</welcome-file>
+    </welcome-file-list>
+</web-app>

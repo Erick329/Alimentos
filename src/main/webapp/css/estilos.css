@@ -1,0 +1,51 @@
+/* ===== Identidad visual La Cosecha ===== */
+:root {
+    --verde: #2E7D32;
+    --verde-oscuro: #1B5E20;
+    --verde-claro: #E8F5E9;
+    --naranja: #F57C00;
+    --naranja-claro: #FFB74D;
+}
+body { background: #F6F8F6; color: #263238; }
+.bg-verde { background: var(--verde) !important; }
+.bg-verde-oscuro { background: var(--verde-oscuro) !important; }
+.text-verde { color: var(--verde) !important; }
+.text-naranja-claro { color: var(--naranja-claro) !important; }
+
+.btn-verde { background: var(--verde); color: #fff; border: none; }
+.btn-verde:hover, .btn-verde:focus { background: var(--verde-oscuro); color: #fff; }
+.btn-naranja { background: var(--naranja); color: #fff; border: none; font-weight: 600; }
+.btn-naranja:hover, .btn-naranja:focus { background: #E65100; color: #fff; }
+
+.buscador { min-width: 220px; }
+.hero { background: linear-gradient(120deg, var(--verde), #66BB6A); }
+.hero-iconos { font-size: 4.5rem; white-space: nowrap; }
+
+.tarjeta-producto { transition: transform .15s, box-shadow .15s; border-radius: 14px; overflow: hidden; }
+.tarjeta-producto:hover { transform: translateY(-3px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) !important; }
+.img-producto { height: 150px; width: 100%; object-fit: cover; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+.img-grande { height: 320px; font-size: 8rem; }
+.icono-cat-1 { background: #FFF8E1; } .icono-cat-2 { background: #E3F2FD; } .icono-cat-3 { background: #FFF3E0; }
+.icono-cat-4 { background: #FCE4EC; } .icono-cat-5 { background: #E8F5E9; }
+.precio { color: var(--verde); font-weight: 700; white-space: nowrap; }
+.paso { display: inline-flex; width: 26px; height: 26px; border-radius: 50%; background: var(--verde); color: #fff;
+        align-items: center; justify-content: center; font-size: .85rem; margin-right: 4px; }
+
+/* ===== Panel administrativo ===== */
+.admin { background: #F4F6F8; }
+.barra-lateral { width: 230px; min-height: 100vh; background: var(--verde-oscuro); position: sticky; top: 0; height: 100vh; }
+.barra-lateral .nav-link { color: #C8E6C9; border-radius: 8px; margin-bottom: 2px; }
+.barra-lateral .nav-link:hover { background: rgba(255,255,255,.08); color: #fff; }
+.barra-lateral .nav-link.active { background: var(--verde); color: #fff; border-left: 4px solid var(--naranja-claro); }
+.contenido-admin { min-width: 0; }
+.caja { background: #fff; border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.kpi { background: #fff; border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 1px 4px rgba(0,0,0,.07); height: 100%; }
+.kpi-t { font-size: .8rem; color: #78909C; }
+.kpi-v { font-size: 1.5rem; font-weight: 700; }
+.kpi-d { font-size: .75rem; color: #607D8B; }
+
+@media (max-width: 767px) {
+    .barra-lateral { width: 100%; min-height: auto; height: auto; position: static; }
+    body.admin > .d-flex { flex-direction: column; }
+    .img-producto { height: 110px; font-size: 2.8rem; }
+}

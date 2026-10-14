@@ -1,0 +1,13 @@
+</main>
+<footer class="bg-verde-oscuro text-light mt-5 py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 small">
+        <div>&copy; 2026 La Cosecha · Productos alimenticios de calidad<br>
+            <span class="opacity-75">Proyecto Final Programación II · UMG Centro Universitario de Portales</span></div>
+        <div class="text-md-end"><i class="bi bi-shield-lock"></i> Compra segura · <i class="bi bi-telephone"></i> 5555-0000<br>
+            <span class="opacity-75">Envío gratis en compras desde Q 200.00</span></div>
+    </div>
+</footer>
+<script src="${ctx}/lib/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="${ctx}/js/app.js"></script>
+</body>
+</html>

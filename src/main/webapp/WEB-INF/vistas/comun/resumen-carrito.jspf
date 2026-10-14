@@ -1,0 +1,13 @@
+<%-- Totales del carrito. Requiere la variable "car" (Carrito). --%>
+<ul class="list-unstyled mb-0">
+    <li class="d-flex justify-content-between"><span>Productos (${car.cantidadTotal})</span><span>Q <fmt:formatNumber value="${car.subtotal}" pattern="#,##0.00"/></span></li>
+    <li class="d-flex justify-content-between text-muted small"><span>IVA incluido (12 %)</span><span>Q <fmt:formatNumber value="${car.iva}" pattern="#,##0.00"/></span></li>
+    <li class="d-flex justify-content-between"><span>Envío</span>
+        <span><c:choose><c:when test="${car.costoEnvio == 0}"><span class="text-success fw-semibold">Gratis</span></c:when>
+            <c:otherwise>Q <fmt:formatNumber value="${car.costoEnvio}" pattern="#,##0.00"/></c:otherwise></c:choose></span></li>
+    <c:if test="${car.faltaParaEnvioGratis > 0}">
+        <li class="small text-success">Agregue Q <fmt:formatNumber value="${car.faltaParaEnvioGratis}" pattern="#,##0.00"/> más para envío gratis.</li>
+    </c:if>
+    <li><hr></li>
+    <li class="d-flex justify-content-between fs-5 fw-bold"><span>Total</span><span class="precio">Q <fmt:formatNumber value="${car.total}" pattern="#,##0.00"/></span></li>
+</ul>

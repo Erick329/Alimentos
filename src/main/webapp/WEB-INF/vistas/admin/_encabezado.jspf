@@ -1,0 +1,53 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<fmt:setLocale value="es_GT"/>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<c:set var="u" value="${sessionScope.usuario}"/>
+<c:set var="ruta" value="${requestScope['jakarta.servlet.forward.servlet_path']}"/>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><c:out value="${titulo}"/> | Panel La Cosecha</title>
+    <link href="${ctx}/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/lib/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="${ctx}/css/estilos.css" rel="stylesheet">
+</head>
+<body class="admin">
+<div class="d-flex">
+    <aside class="barra-lateral d-flex flex-column flex-shrink-0 p-3 text-white">
+        <a href="${ctx}/admin/dashboard" class="text-white text-decoration-none fs-5 fw-bold mb-3">Panel <span class="text-naranja-claro">Admin</span></a>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li><a href="${ctx}/admin/dashboard" class="nav-link ${ruta == '/admin/dashboard' ? 'active' : ''}"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="${ctx}/admin/pedidos" class="nav-link ${ruta == '/admin/pedidos' ? 'active' : ''}"><i class="bi bi-receipt"></i> Pedidos</a></li>
+            <c:if test="${u.admin}">
+                <li><a href="${ctx}/admin/productos" class="nav-link ${ruta == '/admin/productos' ? 'active' : ''}"><i class="bi bi-box-seam"></i> Productos</a></li>
+                <li><a href="${ctx}/admin/categorias" class="nav-link ${ruta == '/admin/categorias' ? 'active' : ''}"><i class="bi bi-tags"></i> Categorías</a></li>
+                <li><a href="${ctx}/admin/inventario" class="nav-link ${ruta == '/admin/inventario' ? 'active' : ''}"><i class="bi bi-clipboard-data"></i> Inventario</a></li>
+                <li><a href="${ctx}/admin/clientes" class="nav-link ${ruta == '/admin/clientes' ? 'active' : ''}"><i class="bi bi-people"></i> Clientes y usuarios</a></li>
+                <li><a href="${ctx}/admin/reportes" class="nav-link ${ruta == '/admin/reportes' ? 'active' : ''}"><i class="bi bi-bar-chart-line"></i> Reportes</a></li>
+            </c:if>
+        </ul>
+        <hr>
+        <div class="small">
+            <div><i class="bi bi-person-badge"></i> <c:out value="${u.nombreCompleto}"/></div>
+            <div class="opacity-75 mb-2">${u.rol}</div>
+            <a href="${ctx}/inicio" class="text-white-50 d-block mb-1"><i class="bi bi-shop"></i> Ver tienda</a>
+            <form action="${ctx}/logout" method="post">
+                <input type="hidden" name="csrf" value="${sessionScope.csrf}">
+                <button class="btn btn-sm btn-outline-light"><i class="bi bi-box-arrow-right"></i> Salir</button>
+            </form>
+        </div>
+    </aside>
+    <main class="flex-grow-1 p-3 p-md-4 contenido-admin">
+        <c:if test="${not empty sessionScope.flashOk}">
+            <div class="alert alert-success alert-dismissible fade show"><c:out value="${sessionScope.flashOk}"/><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+            <c:remove var="flashOk" scope="session"/>
+        </c:if>
+        <c:if test="${not empty sessionScope.flashError}">
+            <div class="alert alert-danger alert-dismissible fade show"><c:out value="${sessionScope.flashError}"/><button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>
+            <c:remove var="flashError" scope="session"/>
+        </c:if>
